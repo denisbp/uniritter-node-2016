@@ -43,4 +43,34 @@ module.exports = function () {
     this.Then(/^its status is (.*)$/, function (status) {
         expect(this.responseBody.data.attributes.status).to.equal(status);
     });
+    
+    this.Given(/^a valid order$/, function () {
+        this.payload = {
+            data: {
+                type: 'orders',
+                attributes: {
+                    items: [{ product_id: '598b04ea-8c20-4240-9c2b-1d36350a8d33', quantity: 1}]
+                }
+            }
+        }
+    });
+    
+    this.When(/^I submit it to the API$/, function () {
+        const
+            that = this;
+        return this.doHttpRequest('orders', 'post', this.payload)
+        .then((response) => {
+            that.response = response;
+            return response;
+        });
+   });
+   
+   this.Then(/^I receive a success message$/, function () {
+        expect(this.response.statusCode).to.equal(201);
+   });
+   
+   this.Then(/^the new order id$/, function () {
+        expect(this.response.body.data.id).not.to.be.undefined;
+        expect(this.response.body.data.id).to.not.empty;
+   });
 }
