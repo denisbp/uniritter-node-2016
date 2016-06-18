@@ -1,0 +1,12 @@
+version: 0.1.0+{build}
+branches:
+  except:
+    - gh-pages
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: "0.1.0.{build}"
+  assembly_file_version: "0.1.0.{build}"
+  assembly_informational_version: "{version}"
+before_build:
+  - nuget restore
