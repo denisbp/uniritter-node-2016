@@ -1,0 +1,9 @@
+{
+    "data": {
+        "type": "products",
+        "attributes": {
+            "name": "Test Name",
+            "price": -1
+        }
+    }
+}
