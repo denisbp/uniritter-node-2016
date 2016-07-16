@@ -34,4 +34,31 @@ module.exports = function () {
     this.Then(/^a payload containing the newly created resource$/, function () {
         expect(this.response.body).to.containSubset(this.fixture.request);
     });    
+    
+    this.When(/^I submit it to the API$/, function () {
+        const
+            that = this;
+        return this.doHttpRequest(this.payload.data.type, 'post', this.payload)
+        .then((response) => {
+            that.response = response;
+            return response;
+        })
+        .catch(error => {
+            that.error = error;
+            return error;
+        });
+   });
+   
+   this.Then(/^I receive a success message$/, function () {
+        expect(this.response.statusCode).to.equal(201);
+   });
+   
+   this.Then(/^I receive an error response$/, function () {
+        expect(this.response).to.be.undefined;
+        expect(this.error.statusCode).not.to.be.undefined;
+   });
+   
+   this.Then(/^a message saying that (.*)$/, function (message) {
+        expect(message).to.contain(this.error.body.errors[0].message);
+   });
 };
