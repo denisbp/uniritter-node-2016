@@ -1,0 +1,8 @@
+{
+    "data": {
+        "type": "orders",
+        "attributes": {
+            "items": [{ "product_id": "598b04ea-8c20-4240-9c2b-1d36350a8d33"}]
+        }
+    }
+}
