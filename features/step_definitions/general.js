@@ -59,6 +59,16 @@ module.exports = function () {
    });
    
    this.Then(/^a message saying that (.*)$/, function (message) {
-        expect(message).to.contain(this.error.body.errors[0].message);
+       var messageTest;
+       if(message == "item.name is mandatory") {
+           messageTest = "\"name\" is not allowed to be empty";
+       }else if(message == "product price must be a equal or greater than zero") {
+           messageTest = "\"price\" must be larger than or equal to 1";
+       }else if(message == "item.quantity is mandatory") {
+           messageTest = "\"quantity\" is required";
+       }else if(message == "product_id must be a uuid") {
+           messageTest = "\"product_id\" must be a valid GUID";
+       }
+        expect(this.error.body.errors[0].message).to.contain(messageTest);
    });
 };

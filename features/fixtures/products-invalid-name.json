@@ -2,6 +2,7 @@
     "data": {
         "type": "products",
         "attributes": {
+            "name": "",
             "price": 1
         }
     }

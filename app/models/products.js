@@ -8,7 +8,7 @@ module.exports = function (server) {
         schema = {
             type: 'products',
             attributes: {
-                name: Types.string().required(),
+                name: Types.string().min(1).required(),
                 price: Types.number().required().min(1),
                 brand: Types.string(), 
                 model: Types.string()

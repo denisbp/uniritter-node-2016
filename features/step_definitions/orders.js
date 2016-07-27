@@ -43,7 +43,6 @@ module.exports = function () {
         expect(this.responseBody.data.attributes.status).to.equal(status);
     });
     
-<<<<<<< HEAD
     this.Given(/^a valid order$/, function () {
         this.payload = {
             data: {
@@ -59,10 +58,22 @@ module.exports = function () {
         expect(this.response.body.data.id).not.to.be.undefined;
         expect(this.response.body.data.id).to.not.empty;
    });
-=======
     this.Then(/^wait a few seconds$/, function (callback) {
         setTimeout(callback, 3000);
     });
+    this.Then(/^it moves to a paid status$/, function () {
+        this.doHttpRequest('orders/' + this.response.body.id, 'get', undefined)
+         .then((response) => {
+            expect(response.body.data.attributes.status).to.equal("paid");
+            return response;
+        });
+    });
     
->>>>>>> upstream/master
+     this.Given(/^an invalid order that is missing an item quantity$/, function () {
+        this.payload = require('../fixtures/orders-invalid-missing-quantity')
+    });
+    
+     this.Given(/^an invalid order that has an invalid format in product_id$/, function () {
+        this.payload = require('../fixtures/orders-invalid-product-id')
+    });
 }
