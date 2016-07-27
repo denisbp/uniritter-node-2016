@@ -15,7 +15,7 @@ Scenario Outline: invalid product
   And a message saying that <notification>
 Examples:
   |         condition                   |   notification                |
-  | is missing the name                 | item.name is mandatory    |
-  | has a negative price                | product price must be a equal or greater than zero     |
+  | is missing the name                 | "name" is not allowed to be empty    |
+  | has a negative price                | "price" must be larger than or equal to 1     |
   
       

@@ -23,9 +23,9 @@ Scenario Outline: invalid order
   Then I receive an error response
   And a message saying that <notification>
 Examples:
-  |         condition                   |   notification                |
-  | is missing an item quantity         | item.quantity is mandatory    |
-  | has an invalid format in product_id | product_id must be a uuid     |
+  |         condition                   |   notification                          |
+  | is missing an item quantity         | "quantity" is required                  |
+  | has an invalid format in product_id | "product_id" must be a valid GUID     |
 
 Scenario: order payment
     Given a valid order
